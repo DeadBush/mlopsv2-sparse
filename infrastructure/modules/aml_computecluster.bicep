@@ -10,7 +10,7 @@ resource amlci 'Microsoft.MachineLearningServices/workspaces/computes@2020-09-01
     properties: {
       vmSize: 'Standard_DS3_v2'
       subnet: json('null')
-      osType: 'Windows'
+      osType: 'Linux'
       scaleSettings: {
         maxNodeCount: 4
         minNodeCount: 0
