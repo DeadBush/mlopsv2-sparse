@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+type: mltable                             # tells Azure ML this is a Table asset :contentReference[oaicite:0]{index=0}
+name: taxi-data
+version: 1
+paths:
+  - file: ./data/taxi-data.csv
