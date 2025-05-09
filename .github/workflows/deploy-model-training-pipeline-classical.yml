@@ -43,7 +43,6 @@ jobs:
       workspace_name: ${{ needs.get-config.outputs.aml_workspace }}
       name: taxi-data
       data_file: mlops/azureml/train/data-mltable.yml
-      type: mltable
     secrets:
       creds: ${{ secrets.AZURE_CREDENTIALS }}
   create-compute:
