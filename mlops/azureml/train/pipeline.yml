@@ -7,7 +7,7 @@ description: Training Pipeline to train a model that predicts taxi fare price
 # <inputs_and_outputs>
 inputs:
   input:
-    type: mltable
+    type: uri_file
     path: azureml:taxi-data@latest
   enable_monitoring: 'false'
   table_name: 'taximonitoring'
