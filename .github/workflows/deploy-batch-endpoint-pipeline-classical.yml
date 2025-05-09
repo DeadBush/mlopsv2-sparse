@@ -22,12 +22,12 @@ jobs:
           echo "config-file=$config_env" >> $GITHUB_OUTPUT;
   get-config:
     needs: set-env-branch
-    uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
+    uses: DeadBush/mlops-templates/.github/workflows/read-yaml.yml@main
     with:
       file_name: ${{ needs.set-env-branch.outputs.config-file}}
   create-compute:
     needs: get-config
-    uses: Azure/mlops-templates/.github/workflows/create-compute.yml@main
+    uses: DeadBush/mlops-templates/.github/workflows/create-compute.yml@main
     with:
       cluster_name: batch-cluster
       size: STANDARD_DS3_V2
@@ -37,10 +37,10 @@ jobs:
       resource_group: ${{ needs.get-config.outputs.resource_group }}
       workspace_name: ${{ needs.get-config.outputs.aml_workspace }}
     secrets:
-      creds: ${{secrets.AZURE_CREDENTIALS}}
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
   create-endpoint:
     needs: [get-config, create-compute]
-    uses: Azure/mlops-templates/.github/workflows/create-endpoint.yml@main
+    uses: DeadBush/mlops-templates/.github/workflows/create-endpoint.yml@main
     with:
       resource_group: ${{ needs.get-config.outputs.resource_group }}
       workspace_name: ${{ needs.get-config.outputs.aml_workspace }}
@@ -48,9 +48,9 @@ jobs:
       endpoint_name: ${{ format('taxi-gha-{0}', needs.get-config.outputs.bep) }}
       endpoint_type: batch
     secrets:
-      creds: ${{secrets.AZURE_CREDENTIALS}}
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
   create-deployment:
-    uses: Azure/mlops-templates/.github/workflows/create-deployment.yml@main
+    uses: DeadBush/mlops-templates/.github/workflows/create-deployment.yml@main
     needs: [get-config, create-endpoint]
     with:
       resource_group: ${{ needs.get-config.outputs.resource_group }}
@@ -60,4 +60,4 @@ jobs:
       endpoint_type: batch
       deployment_name: eptestdeploy
     secrets:
-      creds: ${{secrets.AZURE_CREDENTIALS}}
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
